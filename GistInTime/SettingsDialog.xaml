@@ -21,6 +21,6 @@
         <TextBox x:Name="username" Margin="5" />
         <TextBlock Text="Password" Foreground="White" FontWeight="SemiBold" Margin="5" />
         <PasswordBox x:Name="password" Margin="5,5,5,15" />
-        <Button x:Name="Save" Content="Save" Margin="5" Style="{DynamicResource MetroFlatButton}" IsDefault="True" />
+        <Button x:Name="Save" Content="Authenticate" Margin="5" Style="{DynamicResource MetroFlatButton}" IsDefault="True" />
     </StackPanel>
 </Controls:MetroWindow>
