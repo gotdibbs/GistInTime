@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="GistInTime.exe" version="1.0.0.1" publicKeyToken="2b399ab0cc89668a" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="cloud.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="GistInTime" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="GistInTime.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GistInTime.exe" size="50688">
+      <assemblyIdentity name="GistInTime" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>/HWqj/3vzfh/LSLXRrVcLpgrH596AV+EwDTrxCLGSfE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MahApps.Metro.dll" size="303104">
+      <assemblyIdentity name="MahApps.Metro" version="0.10.0.0" publicKeyToken="F4FB5A3C4D1E5B4F" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>CbuNDLUhu2+/n0/mAhY88Zu0M+nvEycFyBd2sALRyYM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Windows.Interactivity.dll" size="55904">
+      <assemblyIdentity name="System.Windows.Interactivity" version="4.5.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>NcZpfncwyg/KlsHxtp/vjmWL0oeJxP26BJJtAlOKo0E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfControls.dll" size="30720">
+      <assemblyIdentity name="WpfControls" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>oeSYGZdi78tkdAKYG+0IXBYalffp/mDUKKUN3CX2Ito=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="cloud.ico" size="1150">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>4wQophYU0ErIzqSBOGfkEOjD9ThRFIZUELACSgN1ze0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="GistInTime.exe.config" size="1016">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>h0d91+wQz6YvzVxPy+MdB4CX/bdWrijfgDgUkaavxhs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=SONOMAPARTNERS\wdibbern" issuerKeyHash="e4d9d7d6ee1078af24c3d5c15f65a504c88a47a8" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>738pj4mrS1lzLZE3b2gtoyBkBxS2j5wGrNukl5pSGjE=</DigestValue></Reference></SignedInfo><SignatureValue>EQRRGPKT6DBWwix3rJofG9BtJRyTH2Rk1av/8tmSDWTmguKFOKSs+S/EHQ4ei5MQXbzpkesXmeE7pXaDGZUbjYjyHtoqyPS8J1MV3h6l51Re2okiUP6LKom7w5hbYtYe93Qos14nnQ53hHuCCIjeo+ctJFRTyCQ4k2c/bHhz7sg=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>3IYETHcpMEAi3PnCjMahALakCROLEigZQwdiGY5lgI4Gim2hdcVkQRhKGzhALz2ePKVdCCyjFLS0wiz1ws5FVCi0kqp9lgYPjfmIh6ToSj6fZ7DpAzL5k6GJVCU9t71lQhFMHsHHoabTvSB8x5M2K2oW4hl58jdb/+KI+ZchLoU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="311a529a97a4dbac069c8fb614076420a32d686f37912d73594bab898f297fef" Description="" Url=""><as:assemblyIdentity name="GistInTime.exe" version="1.0.0.1" publicKeyToken="2b399ab0cc89668a" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=SONOMAPARTNERS\wdibbern</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>qhUSQuN5KYIoWXq8WmR4olcg7a7EWyymFjIZBGkW73g=</DigestValue></Reference></SignedInfo><SignatureValue>y1cd4Gew39EAYscwew2J0pRP/ISewlHv8vLy8K9AvD51ik3/ZhtS29eC5V+G7YZPwmkiKc1YfEKxA9Qt65S7ez0958hVSSPU3zoP55hfLVGUgyDrduDX5wQiLsCoesk85vK4cF54jhgT103OpwTcCeQC8mxHM8VHjy9m+m3ptpY=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>3IYETHcpMEAi3PnCjMahALakCROLEigZQwdiGY5lgI4Gim2hdcVkQRhKGzhALz2ePKVdCCyjFLS0wiz1ws5FVCi0kqp9lgYPjfmIh6ToSj6fZ7DpAzL5k6GJVCU9t71lQhFMHsHHoabTvSB8x5M2K2oW4hl58jdb/+KI+ZchLoU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB9TCCAV6gAwIBAgIQVtEDcPqPxJlGHqxnwKLYAzANBgkqhkiG9w0BAQsFADA5MTcwNQYDVQQDHi4AUwBPAE4ATwBNAEEAUABBAFIAVABOAEUAUgBTAFwAdwBkAGkAYgBiAGUAcgBuMB4XDTEzMDYxOTE3MDQ1NVoXDTE0MDYxOTIzMDQ1NVowOTE3MDUGA1UEAx4uAFMATwBOAE8ATQBBAFAAQQBSAFQATgBFAFIAUwBcAHcAZABpAGIAYgBlAHIAbjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA3IYETHcpMEAi3PnCjMahALakCROLEigZQwdiGY5lgI4Gim2hdcVkQRhKGzhALz2ePKVdCCyjFLS0wiz1ws5FVCi0kqp9lgYPjfmIh6ToSj6fZ7DpAzL5k6GJVCU9t71lQhFMHsHHoabTvSB8x5M2K2oW4hl58jdb/+KI+ZchLoUCAwEAATANBgkqhkiG9w0BAQsFAAOBgQCit4jFsCnw//WBt8XvOzNu6udocZi3oL7q61dLbez51FNQdkeWwaPJT3j5rGLmMFd+7ZoahSBmszfloqafioX6LsUd2L3APB0tJGAMVV51oTxxEGrEY6KAoGixR5E9GtgOpKeWJsu5AjZS2+BBH78QKGhPfZ+bxKJMob6nEzQfgg==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

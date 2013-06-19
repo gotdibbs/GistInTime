@@ -11,11 +11,6 @@ namespace GistInTime
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        // https://github.com/cromwellryan/Gister/tree/master/Gister
-        // OAuth API http://developer.github.com/v3/oauth/#oauth-authorizations-api
-        // Register new app https://github.com/settings/applications/new
-        // Gists api http://developer.github.com/v3/gists/#authentication
-
         public MainWindow()
         {
             InitializeComponent();

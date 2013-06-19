@@ -90,6 +90,7 @@ namespace GistInTime
                 Api = new Data.GitHubApi();
 
                 var dialog = new SettingsDialog();
+                dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 dialog.ShowDialog();
 
                 if (!dialog.IsAuthenticated)
