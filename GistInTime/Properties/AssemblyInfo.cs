@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("GistInTime")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("GotDibbs")]
 [assembly: AssemblyProduct("GistInTime")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
