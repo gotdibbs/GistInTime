@@ -1,0 +1,52 @@
+﻿<Controls:MetroWindow x:Class="GistInTime.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:GistInTime.Helpers"
+        xmlns:toolkit="http://wpfcontrols.com/"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Background="Black"
+        Title="GistInTime" Height="75" Width="525" WindowStyle="ToolWindow" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:GistSuggestionProvider x:Key="gistProvider" />
+                    <DataTemplate x:Key="gistTemplate">
+                        <StackPanel Background="White">
+                            <TextBlock Text="{Binding Path=description}" 
+                                       FontWeight="SemiBold"
+                                       Foreground="#FF086F9E" />
+                            <TextBlock FontSize="10"
+                                       Foreground="LightGray">
+                                <Run Text="Author: " />
+                                <Run Text="{Binding Path=user.login}" FontWeight="SemiBold" />
+                                <Run Text=" - " />
+                                <Run Text="Last Updated: " />
+                                <Run Text="{Binding Path=updated_at_display}" FontWeight="SemiBold" />
+                                <Run Text=" - " />
+                                <Run Text="File Name: " />
+                                <Run Text="{Binding Path=first_file_name}" FontWeight="SemiBold" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <toolkit:AutoCompleteTextBox x:Name="SearchBox"
+                                     Height="28"
+                                     FontSize="18"
+                                     Margin="5,0"
+                                     DisplayMember="description"
+                                     Background="White"
+                                     ItemTemplate="{StaticResource ResourceKey=gistTemplate}"
+                                     Provider="{StaticResource ResourceKey=gistProvider}" />
+    </Grid>
+</Controls:MetroWindow>
