@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:GistInTime.Helpers"
         xmlns:toolkit="http://wpfcontrols.com/"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Background="Black"
+        Background="#EEE"
         Title="GistInTime" Height="75" Width="525" WindowStyle="ToolWindow" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
@@ -12,10 +12,10 @@
                 <ResourceDictionary>
                     <local:GistSuggestionProvider x:Key="gistProvider" />
                     <DataTemplate x:Key="gistTemplate">
-                        <StackPanel Background="White">
+                        <StackPanel Background="#EEE">
                             <TextBlock Text="{Binding Path=description}" 
                                        FontWeight="SemiBold"
-                                       Foreground="#FF086F9E"
+                                       Foreground="#086F9E"
                                        Padding="5,0"/>
                             <TextBlock FontSize="10"
                                        Foreground="Gray"

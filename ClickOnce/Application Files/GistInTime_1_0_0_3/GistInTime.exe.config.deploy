@@ -16,6 +16,9 @@
             <setting name="AuthToken" serializeAs="String">
                 <value />
             </setting>
+            <setting name="AuthTokenId" serializeAs="String">
+                <value />
+            </setting>
         </GistInTime.Properties.Settings>
     </userSettings>
 </configuration>
