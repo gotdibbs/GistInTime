@@ -15,9 +15,11 @@
                         <StackPanel Background="White">
                             <TextBlock Text="{Binding Path=description}" 
                                        FontWeight="SemiBold"
-                                       Foreground="#FF086F9E" />
+                                       Foreground="#FF086F9E"
+                                       Padding="5,0"/>
                             <TextBlock FontSize="10"
-                                       Foreground="LightGray">
+                                       Foreground="Gray"
+                                       Padding="5,0">
                                 <Run Text="Author: " />
                                 <Run Text="{Binding Path=user.login}" FontWeight="SemiBold" />
                                 <Run Text=" - " />
