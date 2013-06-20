@@ -17,5 +17,7 @@ Setup
 ----
 
  1. [Install the ClickOnce app from here](https://raw.github.com/gotdibbs/GistInTime/master/ClickOnce/setup.exe) (or download, build and publish locally).
- 2. Enter your GitHub username and password and click **Authenticate**. 
-    (Note: this will only grab an authtoken, it will not store your username or password anywhere).
+ 2. When the application launches, enter your GitHub username and password and click **Authenticate**. 
+    Note: this will only grab an authorization token, it will not store your username or password.
+
+	> <img alt="ScreenShot" src="https://raw.github.com/gotdibbs/GistInTime/master/screenshot-login.png" style="border: 1px solid #444;" />
