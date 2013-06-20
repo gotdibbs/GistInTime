@@ -113,6 +113,32 @@ namespace GistInTime.Data
             }
         }
 
+        public async Task<bool> RevokeToken(string tokenId)
+        {
+            try
+            {
+                var request = GetHttpRequest(HttpMethod.Delete, string.Concat(BaseUrl, "/authorizations/", tokenId));
+
+                request.Headers["Authorization"] = string.Concat("bearer ", AuthToken);
+
+                using (var response = await request.GetResponseAsync() as HttpWebResponse)
+                {
+                    if (response.StatusCode != HttpStatusCode.NoContent)
+                    {
+                        throw new Exception(string.Format("Server error (HTTP {0}: {1}).",
+                            response.StatusCode,
+                            response.StatusDescription));
+                    }
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         #region Generic Request Helpers
 
         public async Task<T> ExecuteRequest<T>(

@@ -22,6 +22,8 @@ namespace GistInTime
     {
         internal bool IsAuthenticated { get; set; }
 
+        internal Model.AuthorizationResponse AuthResponse { get; set; }
+
         public SettingsDialog()
         {
             InitializeComponent();
@@ -51,6 +53,7 @@ namespace GistInTime
                 if (response != null && !string.IsNullOrEmpty(response.token))
                 {
                     IsAuthenticated = true;
+                    AuthResponse = response;
                     this.Hide();
                 }
                 else

@@ -46,5 +46,17 @@ namespace GistInTime.Properties {
                 this["AuthToken"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AuthTokenId {
+            get {
+                return ((string)(this["AuthTokenId"]));
+            }
+            set {
+                this["AuthTokenId"] = value;
+            }
+        }
     }
 }

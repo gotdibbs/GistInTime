@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Application = System.Windows.Application;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
-using System.Threading.Tasks;
-using System.Threading;
+using MessageBox = System.Windows.MessageBox;
 
 namespace GistInTime
 {
@@ -71,6 +72,10 @@ namespace GistInTime
             contextMenu.MenuItems.Add(newCommand);
             var refreshCommand = new MenuItem("Refresh Gists", new EventHandler(_notifyIcon_Refresh));
             contextMenu.MenuItems.Add(refreshCommand);
+            contextMenu.MenuItems.Add("-");
+            var logoutCommand = new MenuItem("Logout", new EventHandler(_notifyIcon_Logout));
+            contextMenu.MenuItems.Add(logoutCommand);
+            contextMenu.MenuItems.Add("-");
             var exitCommand = new MenuItem("Exit", new EventHandler(_notifyIcon_Exit));
             contextMenu.MenuItems.Add(exitCommand);
 
@@ -101,7 +106,8 @@ namespace GistInTime
                 else
                 {
                     _settings.IsSetup = true;
-                    _settings.AuthToken = Api.AuthToken;
+                    _settings.AuthToken = dialog.AuthResponse.token;
+                    _settings.AuthTokenId = dialog.AuthResponse.id.ToString();
                     _settings.Save();
 
                     LoadSettings();
@@ -157,6 +163,19 @@ namespace GistInTime
             await RefreshGists();
 
             _notifyIcon.ShowBalloonTip(500, "GistInTime", "Gists Refreshed.", ToolTipIcon.Info);
+        }
+
+        private async void _notifyIcon_Logout(object sender, EventArgs e)
+        {
+            var isSuccess = await Api.RevokeToken(_settings.AuthTokenId);
+
+            if (!isSuccess)
+            {
+                MessageBox.Show("Revoking Access Token failed. Please manually remove the authorization token from your GitHub account settings.");
+            }
+
+            _settings.IsSetup = false;
+            LoadSettings();
         }
 
         private void _notifyIcon_Exit(object sender, EventArgs e)
