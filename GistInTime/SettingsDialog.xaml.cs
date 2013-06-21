@@ -20,13 +20,22 @@ namespace GistInTime
     /// </summary>
     public partial class SettingsDialog : MetroWindow
     {
+        private bool _isRevoke = false;
+
         internal bool IsAuthenticated { get; set; }
 
         internal Model.AuthorizationResponse AuthResponse { get; set; }
 
-        public SettingsDialog()
+        public SettingsDialog(bool isRevoke = false)
         {
             InitializeComponent();
+
+            _isRevoke = isRevoke;
+
+            if (isRevoke)
+            {
+                Save.Content = "Revoke Authorization";
+            }
 
             IsAuthenticated = false;
 
@@ -35,7 +44,7 @@ namespace GistInTime
             username.Focus();
         }
 
-        private async void Save_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
             var user = username.Text;
             var pass = password.Password;
@@ -46,7 +55,19 @@ namespace GistInTime
                 return;
             }
 
-            try
+            if (!_isRevoke)
+            {
+                GetAuthorizationToken(user, pass);
+            }
+            else
+            {
+                RevokeAuthorizationToken(user, pass);
+            }
+        }
+
+        private async void GetAuthorizationToken(string user, string pass)
+        {
+            try 
             {
                 var response = await App.Api.Authenticate(user, pass);
 
@@ -60,6 +81,25 @@ namespace GistInTime
                 {
                     MessageBox.Show("Authentication failed. Please check your username and password and try again.");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Authentication failure. Please check your username and password and try again.");
+            }
+        }
+
+        private async void RevokeAuthorizationToken(string user, string pass)
+        {
+            try 
+            {
+                var isSuccess = await App.Api.RevokeToken(App.Api.AuthToken, user, pass);
+
+                if (!isSuccess)
+                {
+                    MessageBox.Show("Revoke failed. Please confirm your authorization token has been removed manually via the GitHub website.");
+                }
+
+                this.Hide();
             }
             catch (Exception ex)
             {

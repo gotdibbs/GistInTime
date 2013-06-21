@@ -145,6 +145,11 @@ namespace GistInTime
             Gists = new List<Model.GistsResponse>(await Api.GetMine());
             Gists.AddRange(await Api.GetStarred());
 
+            if (!(Gists != null && Gists.Count > 0))
+            {
+                _notifyIcon.ShowBalloonTip(500, "GistInTime", "You have no Gists, right click the tray icon to create a new gist.", ToolTipIcon.Warning);
+            }
+
             return true;
         }
 
@@ -165,14 +170,11 @@ namespace GistInTime
             _notifyIcon.ShowBalloonTip(500, "GistInTime", "Gists Refreshed.", ToolTipIcon.Info);
         }
 
-        private async void _notifyIcon_Logout(object sender, EventArgs e)
+        private void _notifyIcon_Logout(object sender, EventArgs e)
         {
-            var isSuccess = await Api.RevokeToken(_settings.AuthTokenId);
-
-            if (!isSuccess)
-            {
-                MessageBox.Show("Revoking Access Token failed. Please manually remove the authorization token from your GitHub account settings.");
-            }
+            var dialog = new SettingsDialog(true);
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            dialog.ShowDialog();
 
             _settings.IsSetup = false;
             LoadSettings();

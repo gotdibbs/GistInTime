@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GistInTime.Data
 {
@@ -38,6 +39,7 @@ namespace GistInTime.Data
             }
             catch (Exception ex)
             {
+                MessageBox.Show("GistInTime Error: " + ex.Message);
                 return null;
             }
         }
@@ -53,6 +55,7 @@ namespace GistInTime.Data
             }
             catch (Exception ex)
             {
+                MessageBox.Show("GistInTime Error: " + ex.Message);
                 return null;
             }
         }
@@ -68,6 +71,7 @@ namespace GistInTime.Data
             }
             catch (Exception ex)
             {
+                MessageBox.Show("GistInTime Error: " + ex.Message);
                 return null;
             }
         }
@@ -113,13 +117,14 @@ namespace GistInTime.Data
             }
         }
 
-        public async Task<bool> RevokeToken(string tokenId)
+        public async Task<bool> RevokeToken(string username, string password, string tokenId)
         {
             try
             {
                 var request = GetHttpRequest(HttpMethod.Delete, string.Concat(BaseUrl, "/authorizations/", tokenId));
 
-                request.Headers["Authorization"] = string.Concat("bearer ", AuthToken);
+                var authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                request.Headers["Authorization"] = string.Concat("Basic ", authInfo);
 
                 using (var response = await request.GetResponseAsync() as HttpWebResponse)
                 {
@@ -197,6 +202,11 @@ namespace GistInTime.Data
         {
             using (var response = await request.GetResponseAsync() as HttpWebResponse)
             {
+                if (response.StatusCode == HttpStatusCode.Forbidden ||
+                    response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new Exception("Authentication failure. Please try refreshing your auth token by logging out and then reauthorizing GistInTime.");
+                }
                 if (response.StatusCode != HttpStatusCode.OK &&
                     response.StatusCode != HttpStatusCode.Created &&
                     response.StatusCode != HttpStatusCode.NoContent)

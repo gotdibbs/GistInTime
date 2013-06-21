@@ -1,10 +1,7 @@
 ﻿using GistInTime.Model;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfControls;
 
 namespace GistInTime.Helpers
@@ -14,6 +11,11 @@ namespace GistInTime.Helpers
         public IEnumerable GetSuggestions(string filter)
         {
             filter = filter.ToLower();
+
+            if (!(App.Gists != null && App.Gists.Count > 0))
+            {
+                return new List<GistsResponse>();
+            }
 
             var results = App.Gists
                 .Where(x => x.description.ToLower().Contains(filter) || 
