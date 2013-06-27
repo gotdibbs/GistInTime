@@ -88,8 +88,6 @@ namespace GistInTime
             _notifyIcon.Visible = true;
         }
 
-        
-
         private void LoadSettings()
         {
             if (!_settings.IsSetup || string.IsNullOrEmpty(_settings.AuthToken))
