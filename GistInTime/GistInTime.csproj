@@ -30,7 +30,7 @@
     <InstallUrl>https://raw.github.com/gotdibbs/GistInTime/master/ClickOnce/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -124,7 +124,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\GitHubApi.cs" />
-    <Compile Include="Helpers\GistProvider.cs" />
     <Compile Include="Helpers\GistSuggestionProvider.cs" />
     <Compile Include="Helpers\HotKey.cs" />
     <Compile Include="Helpers\HotKeyWinApi.cs" />
