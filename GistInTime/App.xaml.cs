@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using GistInTime.Helpers;
 using Application = System.Windows.Application;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 using MessageBox = System.Windows.MessageBox;
+using MessageBoxButtons = System.Windows.MessageBoxButton;
+using System.Deployment.Application;
 
 namespace GistInTime
 {
@@ -68,16 +71,16 @@ namespace GistInTime
         private void InitializeNotifyIcon()
         {
             var contextMenu = new ContextMenu();
-            var newCommand = new MenuItem("New Gist", new EventHandler(_notifyIcon_New));
-            contextMenu.MenuItems.Add(newCommand);
-            var refreshCommand = new MenuItem("Refresh Gists", new EventHandler(_notifyIcon_Refresh));
-            contextMenu.MenuItems.Add(refreshCommand);
-            contextMenu.MenuItems.Add("-");
-            var logoutCommand = new MenuItem("Logout", new EventHandler(_notifyIcon_Logout));
-            contextMenu.MenuItems.Add(logoutCommand);
-            contextMenu.MenuItems.Add("-");
-            var exitCommand = new MenuItem("Exit", new EventHandler(_notifyIcon_Exit));
-            contextMenu.MenuItems.Add(exitCommand);
+            contextMenu.AppendCommand("New Gist", new EventHandler(_notifyIcon_New));
+            contextMenu.AppendCommand("Refresh Gists", new EventHandler(_notifyIcon_Refresh));
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                contextMenu.AppendCommand("Check for Updates", new EventHandler(_notifyIcon_CheckUpdates));
+            }
+            contextMenu.AppendSeparator();
+            contextMenu.AppendCommand("Logout", new EventHandler(_notifyIcon_Logout));
+            contextMenu.AppendSeparator();
+            contextMenu.AppendCommand("Exit", new EventHandler(_notifyIcon_Exit));
 
             _notifyIcon = new NotifyIcon();
             _notifyIcon.ContextMenu = contextMenu;
@@ -87,6 +90,8 @@ namespace GistInTime
             _notifyIcon.Text = "GistInTime";
             _notifyIcon.Visible = true;
         }
+
+        
 
         private void LoadSettings()
         {
@@ -168,6 +173,86 @@ namespace GistInTime
             await RefreshGists();
 
             _notifyIcon.ShowBalloonTip(500, "GistInTime", "Gists Refreshed.", ToolTipIcon.Info);
+        }
+
+        private void _notifyIcon_CheckUpdates(object sender, EventArgs e)
+        {
+            var ad = ApplicationDeployment.CurrentDeployment;
+            UpdateCheckInfo info = null;
+
+            try
+            {
+                info = ad.CheckForDetailedUpdate();
+            }
+            catch (DeploymentDownloadException dde)
+            {
+                MessageBox.Show(string.Format("This version is {0}.{1}.{2}.{3} ", 
+                    ad.UpdatedVersion.Major, 
+                    ad.UpdatedVersion.Minor, 
+                    ad.UpdatedVersion.Build, 
+                    ad.UpdatedVersion.Revision) + Environment.NewLine +
+                    "The new version of the application cannot be downloaded at this time. \n\nPlease check your network connection, or try again later. Error: " + dde.Message, "Error!");
+
+                return;
+            }
+            catch (InvalidDeploymentException ide)
+            {
+                MessageBox.Show("Cannot check for a new version of the application. The ClickOnce deployment is corrupt. Please redeploy the application and try again. Error: " + ide.Message, "Error!");
+                return;
+            }
+            catch (InvalidOperationException ioe)
+            {
+                MessageBox.Show("This application cannot be updated. It is likely not a ClickOnce application. Error: " + ioe.Message, "Error!");
+                return;
+            }
+
+            if (!info.UpdateAvailable)
+            {
+                MessageBox.Show("You're all up to date!");
+            }
+            else
+            {
+                bool doUpdate = true;
+
+                if (!info.IsUpdateRequired)
+                {
+                    var dr = MessageBox.Show(
+                        String.Format("This version is {0}.{1}.{2}.{3} ", ad.UpdatedVersion.Major, ad.UpdatedVersion.Minor, ad.UpdatedVersion.Build, ad.UpdatedVersion.Revision) + Environment.NewLine +
+                        String.Format("Update Version is {0}.{1}.{2}.{3}", info.AvailableVersion.Major, info.AvailableVersion.Minor, info.AvailableVersion.Build, info.AvailableVersion.Revision) + Environment.NewLine +
+                        "Would you like to update the application now?", "Update Available", MessageBoxButtons.OKCancel);
+                    if (dr != MessageBoxResult.OK)
+                    {
+                        doUpdate = false;
+
+                        return;
+                    }
+                }
+                else
+                {
+                    // Display a message that the app MUST reboot. Display the minimum required version.
+                    MessageBox.Show("This application has detected an update from your current " +
+                        "version to version " + info.MinimumRequiredVersion.ToString() +
+                        ". The application will now install the update and restart.",
+                        "Update Available", MessageBoxButtons.OK);
+                    doUpdate = true;
+                }
+
+                if (doUpdate)
+                {
+                    try
+                    {
+                        ad.Update();
+                        MessageBox.Show("The application has been upgraded and will restart now!");
+                        App.Current.Shutdown();
+                        return;
+                    }
+                    catch (DeploymentDownloadException dde)
+                    {
+                        MessageBox.Show("Cannot install the latest version of the application. \n\nPlease check your network connection, or try again later. Error: " + dde);
+                        return;
+                    }
+                }
+            }
         }
 
         private void _notifyIcon_Logout(object sender, EventArgs e)
