@@ -73,10 +73,7 @@ namespace GistInTime
             var contextMenu = new ContextMenu();
             contextMenu.AppendCommand("New Gist", new EventHandler(_notifyIcon_New));
             contextMenu.AppendCommand("Refresh Gists", new EventHandler(_notifyIcon_Refresh));
-            if (ApplicationDeployment.IsNetworkDeployed)
-            {
-                contextMenu.AppendCommand("Check for Updates", new EventHandler(_notifyIcon_CheckUpdates));
-            }
+            contextMenu.AppendCommand("Check for Updates", new EventHandler(_notifyIcon_CheckUpdates));
             contextMenu.AppendSeparator();
             contextMenu.AppendCommand("Logout", new EventHandler(_notifyIcon_Logout));
             contextMenu.AppendSeparator();
