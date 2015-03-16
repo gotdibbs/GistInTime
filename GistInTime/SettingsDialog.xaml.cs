@@ -22,6 +22,8 @@ namespace GistInTime
     {
         private bool _isRevoke = false;
 
+        private GistInTime.Properties.Settings _settings = GistInTime.Properties.Settings.Default;
+
         internal bool IsAuthenticated { get; set; }
 
         internal Model.AuthorizationResponse AuthResponse { get; set; }
@@ -92,7 +94,7 @@ namespace GistInTime
         {
             try 
             {
-                var isSuccess = await App.Api.RevokeToken(App.Api.AuthToken, user, pass);
+                var isSuccess = await App.Api.RevokeToken(user, pass, _settings.AuthTokenId);
 
                 if (!isSuccess)
                 {
