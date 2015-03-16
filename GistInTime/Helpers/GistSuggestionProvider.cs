@@ -12,7 +12,7 @@ namespace GistInTime.Helpers
         {
             filter = filter.ToLower();
 
-            if (!(App.Gists != null && App.Gists.Count > 0))
+            if (App.Gists == null || App.Gists.Count < 1)
             {
                 return new List<GistsResponse>();
             }
@@ -20,7 +20,7 @@ namespace GistInTime.Helpers
             var results = App.Gists
                 .Where(x => x.description.ToLower().Contains(filter) || 
                     x.first_file_name.ToLower().Contains(filter) ||
-                    x.user.login.Contains(filter))
+                    (x.owner != null && x.owner.login.Contains(filter)))
                 .OrderBy(x => x.description);
 
             return results;

@@ -23,6 +23,7 @@ namespace GistInTime.Model
         public string description { get; set; }
         public int comments { get; set; }
         public User user { get; set; }
+        public User owner { get; set; }
         public string comments_url { get; set; }
 
         [IgnoreDataMember]
